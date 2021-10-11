@@ -13,6 +13,7 @@ require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
+require_relative '../lib/middlewares/multitenancy'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -34,5 +35,7 @@ module DbSubdomainMultitenant
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.middleware.insert_after Rails::Rack::Logger, ::Middlewares::Multitenancy
   end
 end

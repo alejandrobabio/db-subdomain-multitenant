@@ -22,8 +22,15 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: db_subdomain_multitenant_development
+  default:
+    <<: *default
+    database: db_subdomain_multitenant_development_default
+  shard1:
+    <<: *default
+    database: db_subdomain_multitenant_development_shard1
+  shard2:
+    <<: *default
+    database: db_subdomain_multitenant_development_shard2
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
